@@ -18,7 +18,7 @@ module.exports = {
         let shortcode = req.body.shortcode;
 
         if (!shortcode) {
-            shortcode = shortid.generate().substring(6, 6);
+            shortcode = shortid.generate().substring(0, 6);
         } else if (shortcode.length < 4) {
             res.render('index', { role: 'danger', url: 'Your shortcodes is less than 4 characters' });
         }
