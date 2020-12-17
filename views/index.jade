@@ -1,0 +1,33 @@
+extends layout/default
+
+block main
+    main.px-3
+      form(action='/generate' name="addEntry" method='post')
+        label(for='basic-url') Enter link for abbreviation
+        .input-group
+          .input-group-prepend
+            span.input-group-text(id='form') Long URL and Short Url
+            input.form-control(style='margin-left:5px;' type='json' name='longUrl')
+            input.form-control(style='margin-left:5px;' type='json' name='shortcode')
+            button.btn.btn-secondary.btn-lg(style='margin-left:5px;' type='submit') Check and Send
+
+      if role === 'success'
+        .alert.alert-success(role='alert')
+          strong Well done! |
+            a(href=url) #{url}
+      else if role === 'danger'
+        .alert.alert-danger(role='alert')
+          strong Oops!
+          |   #{url}
+
+      if role === 'stats'
+        ul.list-group
+          li.list-group-item.active Stats
+          li.list-group-item.list-group-item-dark Short Code: #{stats.shortcode}
+          li.list-group-item.list-group-item-dark Long Url: #{stats.longUrl}
+          li.list-group-item.list-group-item-dark Short Url: #{stats.shortUrl}
+          li.list-group-item.list-group-item-dark Visits: #{stats.numvisits}
+          li.list-group-item.list-group-item-dark Date Visits: #{stats.datevisit.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
+          li.list-group-item.list-group-item-dark Date Of Creation: #{stats.datecreate.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
+
+
